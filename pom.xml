@@ -6,17 +6,24 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>sc.fiji</groupId>
-		<artifactId>pom-fiji</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>1.126</version>
 	</parent>
 
+	<groupId>sc.fiji</groupId>
 	<artifactId>legacy-imglib1</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 
 	<name>Legacy ImgLib1</name>
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
 
 	<properties>
+		<edu.mines.version>20100113</edu.mines.version>
+		<java3d.version>1.5.2</java3d.version>
+		<jcommon.version>1.0.17</jcommon.version>
+		<jfreechart.version>1.0.14</jfreechart.version>
+		<mpicbg.version>20120621</mpicbg.version>
 		<!-- Prevent the plugin from being copied to ./plugins/ by default -->
 		<imagej.app.directory>path/to/Fiji.app/</imagej.app.directory>
 	</properties>
