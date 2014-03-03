@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>1.126</version>
+		<version>1.139</version>
 		<relativePath />
 	</parent>
 
@@ -20,11 +20,15 @@
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
 
 	<properties>
+		<bio-formats.groupId>ome</bio-formats.groupId>
+		<bio-formats.version>5.0.0</bio-formats.version>
+
 		<edu.mines.version>20100113</edu.mines.version>
 		<java3d.version>1.5.2</java3d.version>
 		<jcommon.version>1.0.17</jcommon.version>
 		<jfreechart.version>1.0.14</jfreechart.version>
 		<mpicbg.version>20120621</mpicbg.version>
+
 		<!-- Prevent the plugin from being copied to ./plugins/ by default -->
 		<imagej.app.directory>path/to/Fiji.app/</imagej.app.directory>
 	</properties>
@@ -42,7 +46,12 @@
 		</dependency>
 		<dependency>
 			<groupId>${bio-formats.groupId}</groupId>
-			<artifactId>scifio</artifactId>
+			<artifactId>formats-api</artifactId>
+			<version>${bio-formats.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${bio-formats.groupId}</groupId>
+			<artifactId>formats-bsd</artifactId>
 			<version>${bio-formats.version}</version>
 		</dependency>
 		<dependency>
