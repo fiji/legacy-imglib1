@@ -24,6 +24,7 @@
 		<bio-formats.version>5.0.0</bio-formats.version>
 
 		<edu.mines.version>20100113</edu.mines.version>
+		<imglib2-ij.version>2.0.0-beta-25</imglib2-ij.version>
 		<java3d.version>1.5.2</java3d.version>
 		<jcommon.version>1.0.17</jcommon.version>
 		<jfreechart.version>1.0.14</jfreechart.version>
@@ -129,7 +130,7 @@
 		<dependency>
 			<groupId>net.imglib2</groupId>
 			<artifactId>imglib2-ij</artifactId>
-			<version>${imglib2.version}</version>
+			<version>${imglib2-ij.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.imglib2</groupId>
