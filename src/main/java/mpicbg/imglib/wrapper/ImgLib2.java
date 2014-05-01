@@ -224,7 +224,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.real.FloatType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.real.FloatType >( new mpicbg.imglib.type.numeric.real.FloatType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.real.FloatType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -260,7 +263,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.real.DoubleType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.real.DoubleType >( new mpicbg.imglib.type.numeric.real.DoubleType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.real.DoubleType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -296,7 +302,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.integer.LongType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.integer.LongType >( new mpicbg.imglib.type.numeric.integer.LongType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.integer.LongType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -332,7 +341,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.integer.IntType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.integer.IntType >( new mpicbg.imglib.type.numeric.integer.IntType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.integer.IntType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -368,7 +380,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.integer.UnsignedIntType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.integer.UnsignedIntType >( new mpicbg.imglib.type.numeric.integer.UnsignedIntType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.integer.UnsignedIntType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -404,7 +419,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.integer.ShortType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.integer.ShortType >( new mpicbg.imglib.type.numeric.integer.ShortType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.integer.ShortType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -440,7 +458,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.integer.UnsignedShortType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.integer.UnsignedShortType >( new mpicbg.imglib.type.numeric.integer.UnsignedShortType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.integer.UnsignedShortType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -476,7 +497,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.integer.ByteType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.integer.ByteType >( new mpicbg.imglib.type.numeric.integer.ByteType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.integer.ByteType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
@@ -512,7 +536,10 @@ public class ImgLib2
 		final ImageFactory< mpicbg.imglib.type.numeric.integer.UnsignedByteType > imgFactory = 
 				new ImageFactory< mpicbg.imglib.type.numeric.integer.UnsignedByteType >( new mpicbg.imglib.type.numeric.integer.UnsignedByteType(), factory );
 	
-		return imgFactory.createImage( dim );
+		final Image< mpicbg.imglib.type.numeric.integer.UnsignedByteType > img1 = imgFactory.createImage( dim );
+		factory.disableWrapping();
+		
+		return img1;
 	}
 
 	/**
