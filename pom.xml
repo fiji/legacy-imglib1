@@ -54,7 +54,6 @@
 		<dependency>
 			<groupId>edu.mines</groupId>
 			<artifactId>mines-jtk</artifactId>
-			<version>${edu.mines.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>
