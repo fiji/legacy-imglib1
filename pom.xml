@@ -8,60 +8,56 @@
 	<parent>
 		<groupId>sc.fiji</groupId>
 		<artifactId>pom-fiji</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<version>5.0.2</version>
 		<relativePath />
 	</parent>
 
-	<groupId>sc.fiji</groupId>
 	<artifactId>legacy-imglib1</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
+	<version>DEPRECATED-1-SNAPSHOT</version>
 
 	<name>Legacy ImgLib1</name>
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
 
 	<properties>
-		<bio-formats.groupId>ome</bio-formats.groupId>
-		<bio-formats.version>5.0.0</bio-formats.version>
-
-		<edu.mines.version>20100113</edu.mines.version>
-		<imglib2-ij.version>2.0.0-beta-25</imglib2-ij.version>
-		<java3d.version>1.5.2</java3d.version>
-		<jcommon.version>1.0.17</jcommon.version>
-		<jfreechart.version>1.0.14</jfreechart.version>
-		<mpicbg.version>0.6.1</mpicbg.version>
-
 		<!-- Prevent the plugin from being copied to ./plugins/ by default -->
 		<imagej.app.directory>path/to/Fiji.app/</imagej.app.directory>
 	</properties>
 
 	<dependencies>
+		<!-- ImageJ dependencies -->
 		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
 		</dependency>
+
+		<!-- ImgLib2 dependencies -->
 		<dependency>
-			<groupId>mpicbg</groupId>
-			<artifactId>mpicbg</artifactId>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2-ij</artifactId>
+		</dependency>
+
+		<!-- OME dependencies -->
 		<dependency>
 			<groupId>ome</groupId>
 			<artifactId>formats-api</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xalan</groupId>
+					<artifactId>serializer</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xalan</groupId>
+					<artifactId>xalan</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>ome</groupId>
 			<artifactId>formats-bsd</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>edu.mines</groupId>
-			<artifactId>mines-jtk</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jfree</groupId>
-			<artifactId>jfreechart</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>gov.nist.math</groupId>
-			<artifactId>jama</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ome</groupId>
@@ -71,19 +67,43 @@
 			<groupId>ome</groupId>
 			<artifactId>ome-xml</artifactId>
 		</dependency>
+
+		<!-- Third party dependencies -->
+		<dependency>
+			<groupId>edu.mines</groupId>
+			<artifactId>mines-jtk</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>gov.nist.math</groupId>
+			<artifactId>jama</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mpicbg</groupId>
+			<artifactId>mpicbg</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>jama</groupId>
+					<artifactId>jama</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<dependency>
 			<groupId>java3d</groupId>
 			<artifactId>vecmath</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>net.imglib2</groupId>
-			<artifactId>imglib2-ij</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.imglib2</groupId>
-			<artifactId>imglib2</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -92,7 +112,7 @@
 	</dependencies>
 
 	<repositories>
-		<!-- NB: for project parent, in case of partial checkout -->
+		<!-- NB: for project parent -->
 		<repository>
 			<id>imagej.public</id>
 			<url>http://maven.imagej.net/content/groups/public</url>

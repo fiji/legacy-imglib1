@@ -7,6 +7,7 @@ import net.imglib2.img.cell.AbstractCells;
 import net.imglib2.img.list.ListImg;
 import net.imglib2.img.list.ListImgFactory;
 import net.imglib2.img.list.ListLocalizingCursor;
+import net.imglib2.util.Fraction;
 
 public class ListImgCellsLoad< A extends ArrayDataAccess< A > > extends AbstractCells< A, LoadCell< A >, ListImg< LoadCell< A > > >
 {
@@ -14,7 +15,7 @@ public class ListImgCellsLoad< A extends ArrayDataAccess< A > > extends Abstract
 
 	public ListImgCellsLoad( final ArrayList<A> arrays, final int entitiesPerPixel, final long[] dimensions, final int[] cellDimensions )
 	{
-		super( entitiesPerPixel, dimensions, cellDimensions );
+		super( new Fraction(entitiesPerPixel, 1), dimensions, cellDimensions );
 		cells = new ListImgFactory< LoadCell< A > >().create( numCells, new LoadCell< A >( arrays.get( 0 ), new int[ 1 ], new long[ 1 ], entitiesPerPixel ) );
 
 		final long[] cellGridPosition = new long[ n ];
