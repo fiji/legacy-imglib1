@@ -37,7 +37,6 @@ import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImg;
 import net.imglib2.img.cell.CellImg;
 import net.imglib2.img.cell.CellImgFactory;
-import net.imglib2.util.Fraction;
 
 /**
  * Provides non-copying wrapping from Imglib1 to Imglib2 (cell, array)
@@ -572,7 +571,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.FloatAccess access = new net.imglib2.img.basictypeaccess.array.FloatArray( data );
 		final ArrayImg< net.imglib2.type.numeric.real.FloatType, net.imglib2.img.basictypeaccess.FloatAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.real.FloatType, net.imglib2.img.basictypeaccess.FloatAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.real.FloatType, net.imglib2.img.basictypeaccess.FloatAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.real.FloatType linkedType = new net.imglib2.type.numeric.real.FloatType( arrayImgLib2 );
@@ -605,7 +604,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.DoubleAccess access = new net.imglib2.img.basictypeaccess.array.DoubleArray( data );
 		final ArrayImg< net.imglib2.type.numeric.real.DoubleType, net.imglib2.img.basictypeaccess.DoubleAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.real.DoubleType, net.imglib2.img.basictypeaccess.DoubleAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.real.DoubleType, net.imglib2.img.basictypeaccess.DoubleAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.real.DoubleType linkedType = new net.imglib2.type.numeric.real.DoubleType( arrayImgLib2 );
@@ -638,7 +637,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.LongAccess access = new net.imglib2.img.basictypeaccess.array.LongArray( data );
 		final ArrayImg< net.imglib2.type.numeric.integer.LongType, net.imglib2.img.basictypeaccess.LongAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.integer.LongType, net.imglib2.img.basictypeaccess.LongAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.integer.LongType, net.imglib2.img.basictypeaccess.LongAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.integer.LongType linkedType = new net.imglib2.type.numeric.integer.LongType( arrayImgLib2 );
@@ -671,7 +670,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.IntAccess access = new net.imglib2.img.basictypeaccess.array.IntArray( data );
 		final ArrayImg< net.imglib2.type.numeric.integer.UnsignedIntType, net.imglib2.img.basictypeaccess.IntAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.integer.UnsignedIntType, net.imglib2.img.basictypeaccess.IntAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.integer.UnsignedIntType, net.imglib2.img.basictypeaccess.IntAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.integer.UnsignedIntType linkedType = new net.imglib2.type.numeric.integer.UnsignedIntType( arrayImgLib2 );
@@ -704,7 +703,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.IntAccess access = new net.imglib2.img.basictypeaccess.array.IntArray( data );
 		final ArrayImg< net.imglib2.type.numeric.integer.IntType, net.imglib2.img.basictypeaccess.IntAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.integer.IntType, net.imglib2.img.basictypeaccess.IntAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.integer.IntType, net.imglib2.img.basictypeaccess.IntAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.integer.IntType linkedType = new net.imglib2.type.numeric.integer.IntType( arrayImgLib2 );
@@ -737,7 +736,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.ShortAccess access = new net.imglib2.img.basictypeaccess.array.ShortArray( data );
 		final ArrayImg< net.imglib2.type.numeric.integer.UnsignedShortType, net.imglib2.img.basictypeaccess.ShortAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.integer.UnsignedShortType, net.imglib2.img.basictypeaccess.ShortAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.integer.UnsignedShortType, net.imglib2.img.basictypeaccess.ShortAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.integer.UnsignedShortType linkedType = new net.imglib2.type.numeric.integer.UnsignedShortType( arrayImgLib2 );
@@ -770,7 +769,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.ShortAccess access = new net.imglib2.img.basictypeaccess.array.ShortArray( data );
 		final ArrayImg< net.imglib2.type.numeric.integer.ShortType, net.imglib2.img.basictypeaccess.ShortAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.integer.ShortType, net.imglib2.img.basictypeaccess.ShortAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.integer.ShortType, net.imglib2.img.basictypeaccess.ShortAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.integer.ShortType linkedType = new net.imglib2.type.numeric.integer.ShortType( arrayImgLib2 );
@@ -803,7 +802,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.ByteAccess access = new net.imglib2.img.basictypeaccess.array.ByteArray( data );
 		final ArrayImg< net.imglib2.type.numeric.integer.ByteType, net.imglib2.img.basictypeaccess.ByteAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.integer.ByteType, net.imglib2.img.basictypeaccess.ByteAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.integer.ByteType, net.imglib2.img.basictypeaccess.ByteAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.integer.ByteType linkedType = new net.imglib2.type.numeric.integer.ByteType( arrayImgLib2 );
@@ -836,7 +835,7 @@ public class ImgLib1
 		// create ImgLib2 Array		
 		final net.imglib2.img.basictypeaccess.ByteAccess access = new net.imglib2.img.basictypeaccess.array.ByteArray( data );
 		final ArrayImg< net.imglib2.type.numeric.integer.UnsignedByteType, net.imglib2.img.basictypeaccess.ByteAccess> arrayImgLib2 = 
-			new ArrayImg< net.imglib2.type.numeric.integer.UnsignedByteType, net.imglib2.img.basictypeaccess.ByteAccess>( access, dim, new Fraction() );
+			new ArrayImg< net.imglib2.type.numeric.integer.UnsignedByteType, net.imglib2.img.basictypeaccess.ByteAccess>( access, dim, 1 );
 			
 		// create a Type that is linked to the container
 		final net.imglib2.type.numeric.integer.UnsignedByteType linkedType = new net.imglib2.type.numeric.integer.UnsignedByteType( arrayImgLib2 );
