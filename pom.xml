@@ -1,152 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-		http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.scijava</groupId>
-		<artifactId>pom-scijava</artifactId>
-		<version>1.153</version>
+		<groupId>sc.fiji</groupId>
+		<artifactId>pom-fiji</artifactId>
+		<version>6.1.1</version>
 		<relativePath />
 	</parent>
 
-	<groupId>sc.fiji</groupId>
 	<artifactId>legacy-imglib1</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
+	<version>1.0.1-DEPRECATED-SNAPSHOT</version>
 
 	<name>Legacy ImgLib1</name>
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
 
 	<properties>
-		<bio-formats.groupId>ome</bio-formats.groupId>
-		<bio-formats.version>5.0.0</bio-formats.version>
-
-		<edu.mines.version>20100113</edu.mines.version>
-		<imglib2-ij.version>2.0.0-beta-25</imglib2-ij.version>
-		<java3d.version>1.5.2</java3d.version>
-		<jcommon.version>1.0.17</jcommon.version>
-		<jfreechart.version>1.0.14</jfreechart.version>
-		<mpicbg.version>0.6.1</mpicbg.version>
-
 		<!-- Prevent the plugin from being copied to ./plugins/ by default -->
 		<imagej.app.directory>path/to/Fiji.app/</imagej.app.directory>
 	</properties>
 
 	<dependencies>
+		<!-- ImageJ dependencies -->
 		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
-			<version>${imagej1.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>mpicbg</groupId>
-			<artifactId>mpicbg</artifactId>
-			<version>${mpicbg.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${bio-formats.groupId}</groupId>
-			<artifactId>formats-api</artifactId>
-			<version>${bio-formats.version}</version>
-			<!-- NB: Bio-Formats 5.0.0 erroneously depends on the obsolete
-			         gov.nih.imagej:imagej artifact, which causes a name
-			         clash with net.imagej:ij. So we exclude it.
-			         Additionally, a couple of Bio-Formats' dependencies
-			         lack the test-scope. -->
-			<exclusions>
-				<exclusion>
-					<groupId>gov.nih.imagej</groupId>
-					<artifactId>imagej</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.testng</groupId>
-					<artifactId>testng</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>${bio-formats.groupId}</groupId>
-			<artifactId>formats-bsd</artifactId>
-			<version>${bio-formats.version}</version>
-			<!-- NB: Bio-Formats 5.0.0 erroneously depends on the obsolete
-			         gov.nih.imagej:imagej artifact, which causes a name
-			         clash with net.imagej:ij. So we exclude it.
-			         Additionally, a couple of Bio-Formats' dependencies
-			         lack the test-scope. -->
-			<exclusions>
-				<exclusion>
-					<groupId>gov.nih.imagej</groupId>
-					<artifactId>imagej</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.testng</groupId>
-					<artifactId>testng</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>edu.mines</groupId>
-			<artifactId>mines-jtk</artifactId>
-			<version>${edu.mines.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jfree</groupId>
-			<artifactId>jcommon</artifactId>
-			<version>${jcommon.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jfree</groupId>
-			<artifactId>jfreechart</artifactId>
-			<version>${jfreechart.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>java3d</groupId>
-			<artifactId>vecmath</artifactId>
-			<version>${java3d.version}</version>
-			<scope>provided</scope>
-		</dependency>
+
+		<!-- ImgLib2 dependencies -->
 		<dependency>
 			<groupId>net.imglib2</groupId>
-			<artifactId>imglib2-algorithms</artifactId>
-			<version>${imglib2.version}</version>
+			<artifactId>imglib2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.imglib2</groupId>
 			<artifactId>imglib2-ij</artifactId>
-			<version>${imglib2-ij.version}</version>
+		</dependency>
+
+		<!-- OME dependencies -->
+		<dependency>
+			<groupId>ome</groupId>
+			<artifactId>formats-api</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xalan</groupId>
+					<artifactId>serializer</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xalan</groupId>
+					<artifactId>xalan</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>net.imglib2</groupId>
-			<artifactId>imglib2</artifactId>
-			<version>${imglib2.version}</version>
+			<groupId>ome</groupId>
+			<artifactId>formats-bsd</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>ome</groupId>
+			<artifactId>formats-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ome</groupId>
+			<artifactId>ome-xml</artifactId>
+		</dependency>
+
+		<!-- Third party dependencies -->
+		<dependency>
+			<groupId>edu.mines</groupId>
+			<artifactId>mines-jtk</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>gov.nist.math</groupId>
+			<artifactId>jama</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mpicbg</groupId>
+			<artifactId>mpicbg</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>jama</groupId>
+					<artifactId>jama</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>java3d</groupId>
+			<artifactId>vecmath</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<repositories>
-		<!-- NB: for project parent, in case of partial checkout -->
+		<!-- NB: for project parent -->
 		<repository>
 			<id>imagej.public</id>
 			<url>http://maven.imagej.net/content/groups/public</url>
