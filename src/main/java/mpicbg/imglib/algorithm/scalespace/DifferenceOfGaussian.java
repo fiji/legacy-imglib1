@@ -302,7 +302,9 @@ public class DifferenceOfGaussian < A extends Type<A>, B extends NumericType<B> 
         //
         final Function<B, B, B> function = getNormalizedSubtraction();        
         final ImageCalculatorInPlace<B, B> imageCalc = new ImageCalculatorInPlace<B, B>( gauss2, gauss1, function );
-        
+
+        imageCalc.setNumThreads( getNumThreads() );
+
         if ( !imageCalc.checkInput() || !imageCalc.process() )
         {
         	errorMessage =  "Cannot subtract images: " + imageCalc.getErrorMessage();
