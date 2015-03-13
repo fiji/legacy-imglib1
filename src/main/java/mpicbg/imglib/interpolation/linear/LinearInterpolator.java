@@ -10,13 +10,13 @@
  * %%
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *
+ * 
  * 1. Redistributions of source code must retain the above copyright notice,
  *    this list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- *
+ * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -28,7 +28,7 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- *
+ * 
  * The views and conclusions contained in the software and documentation are
  * those of the authors and should not be interpreted as representing official
  * policies, either expressed or implied, of any organization.
@@ -55,29 +55,29 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 {
 	final LocalizableByDimCursor<T> cursor;
 	final T tmp1, tmp2;
-
+	
 	// the offset in each dimension and a temporary array for computing the global coordinates
 	final int[] baseDim, location;
-
+	
 	// the weights and inverse weights in each dimension
 	final float[][] weights;
-
+	
 	// to save the temporary values in each dimension when computing the final value
 	// the value in [ 0 ][ 0 ] will be the interpolated value
 	final T[][] tree;
-
+	
 	// the half size of the second array in each tree step - speedup
 	final int[] halfTreeLevelSizes;
-
+		
 	// the locations where to initially grab pixels from
 	final boolean[][] positions;
-
+	
 	protected LinearInterpolator( final Image<T> img, final InterpolatorFactory<T> interpolatorFactory, final OutOfBoundsStrategyFactory<T> outOfBoundsStrategyFactory )
 	{
 		this( img, interpolatorFactory, outOfBoundsStrategyFactory, true );
 	}
-
-	protected LinearInterpolator( final Image<T> img, final InterpolatorFactory<T> interpolatorFactory, final OutOfBoundsStrategyFactory<T> outOfBoundsStrategyFactory, final boolean initGenericStructures )
+	
+	protected LinearInterpolator( final Image<T> img, final InterpolatorFactory<T> interpolatorFactory, final OutOfBoundsStrategyFactory<T> outOfBoundsStrategyFactory, boolean initGenericStructures )
 	{
 		super(img, interpolatorFactory, outOfBoundsStrategyFactory);
 
@@ -91,15 +91,15 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 		// y |
 		//   |        _
 		//   |        /|     [6]     [7]
-		//   |     z /        *<----->*
+		//   |     z /        *<----->*       
   		//   |      /        /       /|
-		//   |     /    [2] /   [3] / |
+		//   |     /    [2] /   [3] / |    
 		//   |    /        *<----->*  * [5]
 		//   |   /         |       | /
 		//   |  /          |       |/
 		//   | /           *<----->*
 		//   |/           [0]     [1]
-		//   *-------------------------->
+		//   *--------------------------> 
 		//                             x
 		//
 		// STEP 2 - Interpolate in dimension 1 (y)
@@ -107,7 +107,7 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 		//   [2][3]   [6][7]
 		//      *-------*
 		//      |       |
-		//      |       |
+		//      |       |       
 		//      |       |
 		//      *-------*
 		//   [0][1]   [4][5]
@@ -115,26 +115,26 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 		//     [2]     [3]
 		//      *<----->*
 		//      |       |
-		//      |       |
+		//      |       |       
 		//      |       |
 		//      *<----->*
 		//     [0]     [1]
 		//
 		// STEP 3 - Interpolate in dimension 1 (z)
 		//
-		//   [2][3]
-		//      *
-		//      |
-		//      |
-		//      |
-		//      *
-		//   [0][1]
+		//   [2][3]  
+		//      *    
+		//      |     
+		//      |      
+		//      |    
+		//      *    
+		//   [0][1]  
 		//
 		//     [0]     [1]
 		//      *<----->*
 		//
 		// yiels the interpolated value in 3 dimensions
-
+		
 		cursor = img.createLocalizableByDimCursor( outOfBoundsStrategyFactory );
 		tmp1 = img.createType();
 		tmp2 = img.createType();
@@ -144,7 +144,7 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 		weights = new float[ numDimensions ][ 2 ];
 
 		if ( initGenericStructures )
-		{
+		{		
 			// create the temporary datastructure for computing the actual interpolation
 			//
 			// example: 3d-image
@@ -155,33 +155,33 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 			//              [0] [1] [2] [3] [4] [5] [6] [7]
 			// interp in 3d  |   |   |   |   |   |   |   |
 			// store in 2d:  \   /   \   /   \   /   \   /
-			//                [0]     [1]     [2]     [3]
+			//                [0]     [1]     [2]     [3] 
 			// interp in 2d    \       /       \       /
 			// and store in     \     /         \     /
 			// 1d                \   /           \   /
 			//                    [0]             [1]
-			// interpolate in 1d   \               /
-			// and store            \             /
+			// interpolate in 1d   \               /       
+			// and store            \             / 
 			// the final             \           /
 			// result                 \         /
-			//                         \       /
-			//                          \     /
+			//                         \       / 
+			//                          \     / 
 			//                           \   /
 			//  final interpolated value  [0]
-
+	
 			tree = tmp1.createArray2D( numDimensions + 1, 1 );
 			halfTreeLevelSizes = new int[ numDimensions + 1 ];
-
+			
 			for ( int d = 0; d < tree.length; d++ )
 			{
 				tree[ d ] = tmp1.createArray1D( Util.pow( 2, d ));
-
+				
 				for ( int i = 0; i < tree[ d ].length; i++ )
 					tree[ d ][ i ] = img.createType();
-
+	
 				halfTreeLevelSizes[ d ] = tree[ d ].length / 2;
 			}
-
+						
 			// recursively get the coordinates we need for interpolation
 			// ( relative location to the offset in each dimension )
 			//
@@ -189,17 +189,17 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 			//
 			//  x y z index
 			//  0 0 0 [0]
-			//  1 0 0 [1]
+			//  1 0 0 [1] 
 			//  0 1 0 [2]
-			//  1 1 0 [3]
-			// 	0 0 1 [4]
-			// 	1 0 1 [5]
-			// 	0 1 1 [6]
-			// 	1 1 1 [7]
-
+			//  1 1 0 [3] 
+			// 	0 0 1 [4] 
+			// 	1 0 1 [5] 
+			// 	0 1 1 [6] 
+			// 	1 1 1 [7] 
+			
 			positions = new boolean[ Util.pow( 2, numDimensions ) ][ numDimensions ];
 			Util.setCoordinateRecursive( numDimensions - 1, numDimensions, new int[ numDimensions ], positions );
-
+						
 			moveTo( position );
 		}
 		else
@@ -209,7 +209,7 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 			halfTreeLevelSizes = null;
 		}
 	}
-
+	
 	@Override
 	public void close() { cursor.close(); }
 
@@ -217,30 +217,30 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 	public T getType() { return tree[ 0 ][ 0 ]; }
 
 	@Override
-	public void moveTo( final float[] pos )
+	public void moveTo( final float[] position )
 	{
         // compute the offset (Math.floor) in each dimension
 		for (int d = 0; d < numDimensions; d++)
 		{
-			position[ d ] = pos[ d ];
-
-			baseDim[ d ] = pos[ d ] > 0 ? (int)pos[ d ]: (int)pos[ d ]-1;
+			this.position[ d ] = position[ d ];
+			
+			baseDim[ d ] = position[ d ] > 0 ? (int)position[ d ]: (int)position[ d ]-1;			
 			cursor.move( baseDim[ d ] - cursor.getPosition(d), d );
 		}
 
         // compute the weights [0...1] in each dimension and the inverse (1-weight) [1...0]
 		for (int d = 0; d < numDimensions; d++)
 		{
-			final float w = pos[ d ] - baseDim[ d ];
-
+			final float w = position[ d ] - baseDim[ d ];
+			
 			weights[ d ][ 1 ] = w;
 			weights[ d ][ 0 ] = 1 - w;
 		}
-
+		
 		//
 		// compute the output value
 		//
-
+		
 		// the the values from the image
 		for ( int i = 0; i < positions.length; ++i )
 		{
@@ -250,13 +250,13 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 					cursor.fwd(d);
 
 			tree[ numDimensions ][ i ].set( cursor.getType() );
-
+			
 			// move back to the offset position
 			for ( int d = 0; d < numDimensions; ++d )
 				if ( positions[ i ][ d ] )
 					cursor.bck(d);
 		}
-
+		
 		// interpolate down the tree as shown above
 		for ( int d = numDimensions; d > 0; --d )
 		{
@@ -264,80 +264,19 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 			{
 				tmp1.set( tree[ d ][ i*2 ] );
 				tmp2.set( tree[ d ][ i*2+1 ] );
-
+				
 				//tmp1.mul( weights[d - 1][ 0 ] );
 				//tmp2.mul( weights[d - 1][ 1 ] );
 				tmp1.mul( weights[ numDimensions - d ][ 0 ] );
 				tmp2.mul( weights[ numDimensions - d ][ 1 ] );
-
+				
 				tmp1.add( tmp2 );
-
+				
 				tree[ d - 1 ][ i ].set( tmp1 );
 			}
 		}
 	}
-
-	@Override
-    public void moveTo( final double[] pos )
-    {
-        // compute the offset (Math.floor) in each dimension
-        for (int d = 0; d < numDimensions; d++)
-        {
-            position[ d ] = ( float )pos[ d ];
-
-            baseDim[ d ] = pos[ d ] > 0 ? (int)pos[ d ]: (int)pos[ d ]-1;
-            cursor.move( baseDim[ d ] - cursor.getPosition(d), d );
-        }
-
-        // compute the weights [0...1] in each dimension and the inverse (1-weight) [1...0]
-        for (int d = 0; d < numDimensions; d++)
-        {
-            final float w = position[ d ] - baseDim[ d ];
-
-            weights[ d ][ 1 ] = w;
-            weights[ d ][ 0 ] = 1 - w;
-        }
-
-        //
-        // compute the output value
-        //
-
-        // the the values from the image
-        for ( int i = 0; i < positions.length; ++i )
-        {
-            // move to the position
-            for ( int d = 0; d < numDimensions; ++d )
-                if ( positions[ i ][ d ] )
-                    cursor.fwd(d);
-
-            tree[ numDimensions ][ i ].set( cursor.getType() );
-
-            // move back to the offset position
-            for ( int d = 0; d < numDimensions; ++d )
-                if ( positions[ i ][ d ] )
-                    cursor.bck(d);
-        }
-
-        // interpolate down the tree as shown above
-        for ( int d = numDimensions; d > 0; --d )
-        {
-            for ( int i = 0; i < halfTreeLevelSizes[ d ]; i++ )
-            {
-                tmp1.set( tree[ d ][ i*2 ] );
-                tmp2.set( tree[ d ][ i*2+1 ] );
-
-                //tmp1.mul( weights[d - 1][ 0 ] );
-                //tmp2.mul( weights[d - 1][ 1 ] );
-                tmp1.mul( weights[ numDimensions - d ][ 0 ] );
-                tmp2.mul( weights[ numDimensions - d ][ 1 ] );
-
-                tmp1.add( tmp2 );
-
-                tree[ d - 1 ][ i ].set( tmp1 );
-            }
-        }
-    }
-
+	
 	@Override
 	public void setPosition( final float[] position )
 	{
@@ -348,22 +287,22 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 
 			baseDim[ d ] = position[ d ] > 0 ? (int)position[ d ]: (int)position[ d ]-1;
 		}
-
+			
 	    cursor.setPosition( baseDim );
-
+		
         // compute the weights [0...1] in each dimension and the inverse (1-weight) [1...0]
 		for (int d = 0; d < numDimensions; d++)
 		{
 			final float w = position[ d ] - baseDim[ d ];
-
+			
 			weights[ d ][ 1 ] = w;
 			weights[ d ][ 0 ] = 1 - w;
 		}
-
+		
 		//
 		// compute the output value
 		//
-
+		
 		// the the values from the image
 		for ( int i = 0; i < positions.length; ++i )
 		{
@@ -373,13 +312,13 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 					cursor.fwd(d);
 
 			tree[ numDimensions ][ i ].set( cursor.getType() );
-
+			
 			// move back to the offset position
 			for ( int d = 0; d < numDimensions; ++d )
 				if ( positions[ i ][ d ] )
 					cursor.bck(d);
 		}
-
+		
 		// interpolate down the tree as shown above
 		for ( int d = numDimensions; d > 0; --d )
 		{
@@ -387,74 +326,14 @@ public class LinearInterpolator<T extends NumericType<T>> extends InterpolatorIm
 			{
 				tmp1.set( tree[ d ][ i*2 ] );
 				tmp2.set( tree[ d ][ i*2+1 ] );
-
+				
 				tmp1.mul( weights[ numDimensions - d ][ 0 ] );
 				tmp2.mul( weights[ numDimensions - d ][ 1 ] );
-
+				
 				tmp1.add( tmp2 );
-
+				
 				tree[ d - 1 ][ i ].set( tmp1 );
 			}
 		}
 	}
-
-	@Override
-    public void setPosition( final double[] position )
-    {
-        // compute the offset (Math.floor) in each dimension
-        for (int d = 0; d < numDimensions; d++)
-        {
-            this.position[ d ] = ( float )position[ d ];
-
-            baseDim[ d ] = position[ d ] > 0 ? (int)position[ d ]: (int)position[ d ]-1;
-        }
-
-        cursor.setPosition( baseDim );
-
-        // compute the weights [0...1] in each dimension and the inverse (1-weight) [1...0]
-        for (int d = 0; d < numDimensions; d++)
-        {
-            final float w = this.position[ d ] - baseDim[ d ];
-
-            weights[ d ][ 1 ] = w;
-            weights[ d ][ 0 ] = 1 - w;
-        }
-
-        //
-        // compute the output value
-        //
-
-        // the the values from the image
-        for ( int i = 0; i < positions.length; ++i )
-        {
-            // move to the position
-            for ( int d = 0; d < numDimensions; ++d )
-                if ( positions[ i ][ d ] )
-                    cursor.fwd(d);
-
-            tree[ numDimensions ][ i ].set( cursor.getType() );
-
-            // move back to the offset position
-            for ( int d = 0; d < numDimensions; ++d )
-                if ( positions[ i ][ d ] )
-                    cursor.bck(d);
-        }
-
-        // interpolate down the tree as shown above
-        for ( int d = numDimensions; d > 0; --d )
-        {
-            for ( int i = 0; i < halfTreeLevelSizes[ d ]; i++ )
-            {
-                tmp1.set( tree[ d ][ i*2 ] );
-                tmp2.set( tree[ d ][ i*2+1 ] );
-
-                tmp1.mul( weights[ numDimensions - d ][ 0 ] );
-                tmp2.mul( weights[ numDimensions - d ][ 1 ] );
-
-                tmp1.add( tmp2 );
-
-                tree[ d - 1 ][ i ].set( tmp1 );
-            }
-        }
-    }
 }

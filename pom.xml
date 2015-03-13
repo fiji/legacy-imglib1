@@ -83,7 +83,6 @@
 					<artifactId>jama</artifactId>
 				</exclusion>
 			</exclusions>
-			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>

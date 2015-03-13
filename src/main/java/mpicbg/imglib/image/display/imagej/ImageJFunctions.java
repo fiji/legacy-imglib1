@@ -10,15 +10,15 @@
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 2 of the
+ * published by the Free Software Foundation, either version 2 of the 
  * License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
+ * 
+ * You should have received a copy of the GNU General Public 
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-2.0.html>.
  * #L%
@@ -59,9 +59,9 @@ public class ImageJFunctions
 	final public static int GRAY8 = ImagePlus.GRAY8;
 	final public static int GRAY32 = ImagePlus.GRAY32;
 	final public static int COLOR_RGB = ImagePlus.COLOR_RGB;
-
+	
 	public static <T extends Type<T>> ImagePlus displayAsVirtualStack( final Collection<InverseTransformDescription<T>> interpolators,
-																	   final int type, final int[] dim, final int[] dimensionPositions )
+																	   final int type, int[] dim, final int[] dimensionPositions )
 	{
 		return displayAsVirtualStack( interpolators, type, dim, dimensionPositions, null );
 	}
@@ -85,14 +85,14 @@ public class ImageJFunctions
 			minMaxDim[1][1] = -Float.MAX_VALUE;
 			minMaxDim[2][1] = -Float.MAX_VALUE;
 
-			for ( final InverseTransformDescription<T> ti : interpolators )
+			for ( InverseTransformDescription<T> ti : interpolators )
 			{
-				final double[] min = new double[ 3 ];
-				final double[] max = new double[ 3 ];
-
+				float[] min = new float[ 3 ];
+				float[] max = new float[ 3 ];
+				
 				for ( int d = 0; d < 3; ++d )
 					max[ d ] = ti.getImage().getDimension( d );
-
+				
 				ti.getTransform().estimateBounds( min, max );
 				//float[][] minMaxDimLocal = Util.getMinMaxDim( ti.getImage().getDimensions(), ti.getTransform() );
 
@@ -101,10 +101,10 @@ public class ImageJFunctions
 					if ( dim[i] < min.length )
 					{
 						if ( min[ dim[i] ] < minMaxDim[ dim[i] ][ 0 ] )
-							minMaxDim[ dim[i] ][ 0 ] = ( float )min[ dim[i] ];
+							minMaxDim[ dim[i] ][ 0 ] = min[ dim[i] ];
 
 						if ( max[ dim[i] ] > minMaxDim[ dim[i] ][ 1 ] )
-							minMaxDim[ dim[i] ][ 1 ] = ( float )max[ dim[i] ];
+							minMaxDim[ dim[i] ][ 1 ] = max[ dim[i] ];
 					}
 				}
 			}
@@ -121,7 +121,7 @@ public class ImageJFunctions
 				dimensions[ d ] = Math.round( minMaxDim[ d ][ 1 ] ) - Math.round( minMaxDim[ d ][ 0 ] );
 
 		// set the offset for all InverseTransformableIterators
-		for ( final InverseTransformDescription<T> ti : interpolators )
+		for ( InverseTransformDescription<T> ti : interpolators )
 		{
 			final float[] offset = new float[ ti.getImage().getNumDimensions() ];
 
@@ -140,19 +140,19 @@ public class ImageJFunctions
 
 		return imp;
 	}
-
+	
 	public static <T extends RealType<T>> Image< T > wrap( final ImagePlus imp ) { return ImagePlusAdapter.wrap( imp ); }
-
+	
 	public static Image<UnsignedByteType> wrapByte( final ImagePlus imp ) { return ImagePlusAdapter.wrapByte( imp ); }
-
+	
 	public static Image<UnsignedShortType> wrapShort( final ImagePlus imp ) { return ImagePlusAdapter.wrapShort( imp ); }
 
 	public static Image<RGBALegacyType> wrapRGBA( final ImagePlus imp ) { return ImagePlusAdapter.wrapRGBA( imp ); }
-
+	
 	public static Image<FloatType> wrapFloat( final ImagePlus imp ) { return ImagePlusAdapter.wrapFloat( imp ); }
-
-	public static Image<FloatType> convertFloat( final ImagePlus imp ) { return ImagePlusAdapter.convertFloat( imp ); }
-
+	
+	public static Image<FloatType> convertFloat( final ImagePlus imp ) { return ImagePlusAdapter.convertFloat( imp ); }	
+	
 	public static <T extends Type<T>> ImagePlus displayAsVirtualStack( final Image<T> img )
 	{
 		if ( RGBALegacyType.class.isInstance( img.createType() ) )
@@ -184,11 +184,11 @@ public class ImageJFunctions
 		return new ImagePlus( img.getName(), new ImageJVirtualStack<T>( img, type, getDim3(dim), dimensionPositions ) );
 	}
 
-	public static <T extends Type<T>> ImagePlus show( final Image<T> img )
-	{
+	public static <T extends Type<T>> ImagePlus show( final Image<T> img ) 
+	{ 
 		img.getDisplay().setMinMax();
-		final ImagePlus imp = displayAsVirtualStack( img );
-
+		ImagePlus imp = displayAsVirtualStack( img );
+		
 		imp.show();
 		return imp;
 	}
@@ -231,9 +231,9 @@ public class ImageJFunctions
 		return dim;
 	}
 
-	protected static int[] getDim3( final int[] dim )
+	protected static int[] getDim3( int[] dim )
 	{
-		final int[] dimReady = new int[ 3 ];
+		int[] dimReady = new int[ 3 ];
 
 		dimReady[ 0 ] = -1;
 		dimReady[ 1 ] = -1;
@@ -245,7 +245,7 @@ public class ImageJFunctions
 		return dimReady;
 	}
 
-	public static <T extends Type<T>> boolean saveAsTiffs( final Image<T> img, final String directory, final int type )
+	public static <T extends Type<T>> boolean saveAsTiffs( final Image<T> img, String directory, final int type )
 	{
 		return saveAsTiffs( img, directory, img.getName(), type );
 	}
@@ -361,7 +361,7 @@ public class ImageJFunctions
 	{
 		final Display<T> display = img.getDisplay();
 
-		final int[] size = new int[ 3 ];
+		int[] size = new int[ 3 ];
 		size[ 0 ] = img.getDimension( dim[ 0 ] );
 		size[ 1 ] = img.getDimension( dim[ 1 ] );
 		size[ 2 ] = img.getDimension( dim[ 2 ] );
@@ -381,7 +381,7 @@ public class ImageJFunctions
         			if ( dimZ < img.getNumDimensions() )
         				dimPos[ dimZ ] = z;
 
-        			final ByteProcessor bp = new ByteProcessor( size[ 0 ], size[ 1 ] );
+        			ByteProcessor bp = new ByteProcessor( size[ 0 ], size[ 1 ] );
         			bp.setPixels( ImageJVirtualStack.extractSliceByte( img, display, dimX, dimY, dimPos ) );
         			stack.addSlice(""+z, bp);
         		}
@@ -392,7 +392,7 @@ public class ImageJFunctions
         			if ( dimZ < img.getNumDimensions() )
         				dimPos[ dimZ ] = z;
 
-        			final ColorProcessor bp = new ColorProcessor( size[ 0 ], size[ 1 ] );
+        			ColorProcessor bp = new ColorProcessor( size[ 0 ], size[ 1 ] );
         			bp.setPixels( ImageJVirtualStack.extractSliceRGB( img, display, dimX, dimY, dimPos ) );
         			stack.addSlice(""+z, bp);
         		}
@@ -403,7 +403,7 @@ public class ImageJFunctions
         			if ( dimZ < img.getNumDimensions() )
         				dimPos[ dimZ ] = z;
 
-	    			final FloatProcessor bp = new FloatProcessor( size[ 0 ], size[ 1 ] );
+	    			FloatProcessor bp = new FloatProcessor( size[ 0 ], size[ 1 ] );
 	    			bp.setPixels( ImageJVirtualStack.extractSliceFloat( img, display, dimX, dimY, dimPos  ) );
 	    			bp.setMinAndMax( display.getMin(), display.getMax() );
 	    			stack.addSlice(""+z, bp);
@@ -411,7 +411,7 @@ public class ImageJFunctions
         		break;
         }
 
-        final ImagePlus imp =  new ImagePlus( name, stack );
+        ImagePlus imp =  new ImagePlus( name, stack );
         //imp.getProcessor().setMinAndMax( img.getDisplay().getMin(), img.getDisplay().getMax() );
 
         return imp;
