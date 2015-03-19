@@ -10,15 +10,15 @@
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 2 of the 
+ * published by the Free Software Foundation, either version 2 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public 
+ *
+ * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-2.0.html>.
  * #L%
@@ -90,13 +90,13 @@ public class ImageTransform<T extends Type<T>> implements OutputAlgorithm<T>
 		// first determine new min-max in all dimensions of the image
 		// by transforming all the corner-points
 		//
-		final float[] min = new float[ numDimensions ];
-		final float[] max = new float[ numDimensions ];
+		final double[] min = new double[ numDimensions ];
+		final double[] max = new double[ numDimensions ];
 		for ( int i = 0; i < numDimensions; ++i )
 			max[ i ] = dimensions[ i ] - 1;
-		
+
 		transformAsBoundable.estimateBounds( min, max );
-		
+
 		offset = new float[ numDimensions ];
 
 		// get the final size for the new image
@@ -105,7 +105,7 @@ public class ImageTransform<T extends Type<T>> implements OutputAlgorithm<T>
 		for ( int d = 0; d < numDimensions; ++d )
 		{
 			newDim[ d ] = ( int )( max[ d ] - min[ d ] + 1.0f );
-			offset[ d ] = min[ d ];
+			offset[ d ] = ( float )min[ d ];
 		}
 	}
 
@@ -183,7 +183,7 @@ public class ImageTransform<T extends Type<T>> implements OutputAlgorithm<T>
 
 		try
 		{
-			final float[] tmp = new float[ numDimensions ];
+			final double[] tmp = new double[ numDimensions ];
 
 			while (transformedIterator.hasNext())
 			{
@@ -209,7 +209,7 @@ public class ImageTransform<T extends Type<T>> implements OutputAlgorithm<T>
 				transformedIterator.getType().set( interpolator.getType() );
 			}
 		}
-		catch ( NoninvertibleModelException e )
+		catch ( final NoninvertibleModelException e )
 		{
 			transformedIterator.close();
 			interpolator.close();
