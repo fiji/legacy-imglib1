@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>legacy-imglib1</artifactId>
-	<version>1.1.2-DEPRECATED</version>
+	<version>1.1.3-DEPRECATED-SNAPSHOT</version>
 
 	<name>Legacy ImgLib1</name>
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
