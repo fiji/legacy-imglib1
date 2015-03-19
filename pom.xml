@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>legacy-imglib1</artifactId>
-	<version>1.1.2-DEPRECATED-SNAPSHOT</version>
+	<version>1.1.2-DEPRECATED</version>
 
 	<name>Legacy ImgLib1</name>
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
@@ -83,7 +83,7 @@
 					<artifactId>jama</artifactId>
 				</exclusion>
 			</exclusions>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>
