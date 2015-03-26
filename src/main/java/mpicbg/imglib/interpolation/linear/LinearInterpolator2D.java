@@ -10,13 +10,13 @@
  * %%
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice,
  *    this list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -28,7 +28,7 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * The views and conclusions contained in the software and documentation are
  * those of the authors and should not be interpreted as representing official
  * policies, either expressed or implied, of any organization.
@@ -48,7 +48,7 @@ import mpicbg.imglib.type.numeric.NumericType;
  * @author Stephan Preibisch
  * @author Stephan Saalfeld
  */
-public class LinearInterpolator2D<T extends NumericType<T>> extends LinearInterpolator<T> 
+public class LinearInterpolator2D<T extends NumericType<T>> extends LinearInterpolator<T>
 {
 	final int tmpLocation[];
 
@@ -56,23 +56,19 @@ public class LinearInterpolator2D<T extends NumericType<T>> extends LinearInterp
 	{
 		super( img, interpolatorFactory, outOfBoundsStrategyFactory, false );
 
-		tmpLocation = new int[ 2 ];				
-		moveTo( position );		
+		tmpLocation = new int[ 2 ];
+		moveTo( position );
 	}
-	
+
 	@Override
 	public T getType() { return tmp2; }
-	
-	@Override
-	public void moveTo( final float[] position )
+
+	protected void moveTo( final float x, final float y )
 	{
-		final float x = position[ 0 ];
-		final float y = position[ 1 ];
-		
 		this.position[ 0 ] = x;
 		this.position[ 1 ] = y;
-		
-		//   y3         y2  
+
+		//   y3         y2
 		//     *-------*
 		//     |    x  |
 		//     |       |
@@ -86,12 +82,12 @@ public class LinearInterpolator2D<T extends NumericType<T>> extends LinearInterp
 		// update iterator position
 		tmpLocation[ 0 ] = baseX1;
 		tmpLocation[ 1 ] = baseX2;
-		
+
 		cursor.moveTo( tmpLocation );
 
 		// How to iterate the area
 		//
-		//   y3         y2 
+		//   y3         y2
 		//     *<------*
 		//          x  ^
 		//             |
@@ -128,17 +124,25 @@ public class LinearInterpolator2D<T extends NumericType<T>> extends LinearInterp
 		tmp1.mul( u );
 		tmp2.add( tmp1 );
 	}
-	
+
 	@Override
-	public void setPosition( final float[] position )
+	public void moveTo( final float[] pos )
 	{
-		final float x = position[ 0 ];
-		final float y = position[ 1 ];
-		
+		moveTo( pos[ 0 ], pos[ 1 ] );
+	}
+
+	@Override
+	public void moveTo( final double[] pos )
+	{
+		moveTo( ( float )pos[ 0 ], ( float )pos[ 1 ] );
+	}
+
+	protected void setPosition( final float x, final float y )
+	{
 		this.position[ 0 ] = x;
 		this.position[ 1 ] = y;
-		
-		//   y3         y2  
+
+		//   y3         y2
 		//     *-------*
 		//     |    x  |
 		//     |       |
@@ -152,12 +156,12 @@ public class LinearInterpolator2D<T extends NumericType<T>> extends LinearInterp
 		// update iterator position
 		tmpLocation[ 0 ] = baseX1;
 		tmpLocation[ 1 ] = baseX2;
-		
+
 		cursor.setPosition( tmpLocation );
 
 		// How to iterate the area
 		//
-		//   y3         y2 
+		//   y3         y2
 		//     *<------*
 		//          x  ^
 		//             |
@@ -193,6 +197,17 @@ public class LinearInterpolator2D<T extends NumericType<T>> extends LinearInterp
 		tmp1.mul( t1 );
 		tmp1.mul( u );
 		tmp2.add( tmp1 );
-	}	
-	
+	}
+
+	@Override
+	public void setPosition( final float[] pos )
+	{
+		setPosition( pos[ 0 ], pos[ 1 ] );
+	}
+
+	@Override
+	public void setPosition( final double[] pos )
+	{
+		setPosition( ( float )pos[ 0 ], ( float )pos[ 1 ] );
+	}
 }
