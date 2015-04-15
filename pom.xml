@@ -15,11 +15,6 @@
 	<name>Legacy ImgLib1</name>
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
 
-	<properties>
-		<!-- Prevent the plugin from being copied to ./plugins/ by default -->
-		<imagej.app.directory>path/to/Fiji.app/</imagej.app.directory>
-	</properties>
-
 	<dependencies>
 		<!-- ImageJ dependencies -->
 		<dependency>
