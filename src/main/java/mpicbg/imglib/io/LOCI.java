@@ -547,7 +547,7 @@ public class LOCI
 		{
 			final MetadataRetrieve retrieve = (MetadataRetrieve)reader.getMetadataStore();
 			
-			float cal = retrieve.getPixelsPhysicalSizeX( 0 ).getValue().floatValue();
+			float cal = retrieve.getPixelsPhysicalSizeX( 0 ).value().floatValue();
 			if ( cal == 0)
 			{
 				cal = 1;
@@ -558,7 +558,7 @@ public class LOCI
 			
 			if ( img.getNumDimensions() >= 2 )
 			{
-				cal = retrieve.getPixelsPhysicalSizeY( 0 ).getValue().floatValue();
+				cal = retrieve.getPixelsPhysicalSizeY( 0 ).value().floatValue();
 				if ( cal == 0)
 				{
 					cal = 1;
@@ -569,7 +569,7 @@ public class LOCI
 			
 			if ( img.getNumDimensions() >= 3 )
 			{
-				cal = retrieve.getPixelsPhysicalSizeZ( 0 ).getValue().floatValue();
+				cal = retrieve.getPixelsPhysicalSizeZ( 0 ).value().floatValue();
 				if ( cal == 0)
 				{
 					cal = 1;
@@ -580,7 +580,7 @@ public class LOCI
 
 			if ( img.getNumDimensions() >= 4 )
 			{
-				cal = retrieve.getPixelsTimeIncrement( 0 ).floatValue();
+				cal = retrieve.getPixelsTimeIncrement( 0 ).value().floatValue();
 				if ( cal == 0)
 				{
 					cal = 1;

@@ -79,7 +79,8 @@ import mpicbg.imglib.type.numeric.integer.UnsignedIntType;
 import mpicbg.imglib.type.numeric.integer.UnsignedShortType;
 import mpicbg.imglib.type.numeric.real.DoubleType;
 import mpicbg.imglib.type.numeric.real.FloatType;
-import ome.xml.model.primitives.PositiveFloat;
+import ome.units.quantity.Length;
+import ome.units.quantity.Time;
 
 /**
  * Reads in an imglib Image using Bio-Formats.
@@ -96,6 +97,7 @@ public class ImageOpener implements StatusReporter {
 	public static final String Y = "Y";
 	public static final String Z = "Z";
 	public static final String TIME = "Time";
+	public static final String CHANNEL = "Channel";
 
 	// -- Fields --
 
@@ -374,8 +376,7 @@ public class ImageOpener implements StatusReporter {
 		final int sizeY = r.getSizeY();
 		final int sizeZ = r.getSizeZ();
 		final int sizeT = r.getSizeT();
-		final String[] cDimTypes = r.getChannelDimTypes();
-		final int[] cDimLengths = r.getChannelDimLengths();
+		final int sizeC = r.getSizeC();
 		final String dimOrder = r.getDimensionOrder();
 		final List<String> dimTypes = new ArrayList<String>();
 
@@ -395,10 +396,7 @@ public class ImageOpener implements StatusReporter {
 					if (sizeT > 1) dimTypes.add(TIME);
 					break;
 				case 'C':
-					for (int c=0; c<cDimTypes.length; c++) {
-						int len = cDimLengths[c];
-						if (len > 1) dimTypes.add(cDimTypes[c]);
-					}
+					if (sizeC > 1) dimTypes.add(CHANNEL);
 					break;
 			}
 		}
@@ -418,28 +416,28 @@ public class ImageOpener implements StatusReporter {
 			final String dimOrder = r.getDimensionOrder().toUpperCase();
 			final MetadataRetrieve retrieve = (MetadataRetrieve)r.getMetadataStore();
 			
-			PositiveFloat cal;
+			Length cal;
 			
 			final int posX = dimOrder.indexOf( 'X' );
 			cal = retrieve.getPixelsPhysicalSizeX( 0 );
-			if ( posX >= 0 && posX < calibration.length && cal != null && cal.getValue() != 0 )
-				calibration[ posX ] = cal.getValue().floatValue(); 
+			if ( posX >= 0 && posX < calibration.length && cal != null && cal.value().floatValue() != 0 )
+				calibration[ posX ] = cal.value().floatValue(); 
 	
 			final int posY = dimOrder.indexOf( 'Y' );
 			cal = retrieve.getPixelsPhysicalSizeY( 0 );
-			if ( posY >= 0 && posY < calibration.length && cal != null && cal.getValue() != 0 )
-				calibration[ posY ] = cal.getValue().floatValue();
+			if ( posY >= 0 && posY < calibration.length && cal != null && cal.value().floatValue() != 0 )
+				calibration[ posY ] = cal.value().floatValue();
 	
 			final int posZ = dimOrder.indexOf( 'Z' );
 			cal = retrieve.getPixelsPhysicalSizeZ( 0 );
-			if ( posZ >= 0 && posZ < calibration.length && cal != null && cal.getValue() != 0 )
-				calibration[ posZ ] = cal.getValue().floatValue();
+			if ( posZ >= 0 && posZ < calibration.length && cal != null && cal.value().floatValue() != 0 )
+				calibration[ posZ ] = cal.value().floatValue();
 			
 			final int posT = dimOrder.indexOf( 'T' );
 			retrieve.getPixelsTimeIncrement( 0 );
-			Double cal1 = retrieve.getPixelsTimeIncrement( 0 );
-			if ( posT >= 0 && posT < calibration.length && cal1 != null && cal1.floatValue() != 0 )
-				calibration[ posT ] = cal1.floatValue();
+			Time cal1 = retrieve.getPixelsTimeIncrement( 0 );
+			if ( posT >= 0 && posT < calibration.length && cal1 != null && cal1.value().floatValue() != 0 )
+				calibration[ posT ] = cal1.value().floatValue();
 		}
 		catch ( Exception e ) 
 		{
@@ -455,8 +453,7 @@ public class ImageOpener implements StatusReporter {
 		final int sizeY = r.getSizeY();
 		final int sizeZ = r.getSizeZ();
 		final int sizeT = r.getSizeT();
-		//final String[] cDimTypes = r.getChannelDimTypes();
-		final int[] cDimLengths = r.getChannelDimLengths();
+		final int sizeC = r.getSizeC();
 		final String dimOrder = r.getDimensionOrder();
 
 		final List<Integer> dimLengthsList = new ArrayList<Integer>();
@@ -478,10 +475,7 @@ public class ImageOpener implements StatusReporter {
 					if (sizeT > 1) dimLengthsList.add(sizeT);
 					break;
 				case 'C':
-					for (int c=0; c<cDimLengths.length; c++) {
-						int len = cDimLengths[c];
-						if (len > 1) dimLengthsList.add(len);
-					}
+					if (sizeC > 1) dimLengthsList.add(sizeC);
 					break;
 			}
 		}
@@ -500,8 +494,7 @@ public class ImageOpener implements StatusReporter {
 		final int sizeY = r.getSizeY();
 		final int sizeZ = r.getSizeZ();
 		final int sizeT = r.getSizeT();
-		//final String[] cDimTypes = r.getChannelDimTypes();
-		final int[] cDimLengths = r.getChannelDimLengths();
+		final int sizeC = r.getSizeC();
 		final String dimOrder = r.getDimensionOrder();
 
 		final int[] zct = r.getZCTCoords(no);
@@ -523,10 +516,7 @@ public class ImageOpener implements StatusReporter {
 					if (sizeT > 1) pos[index++] = zct[2];
 					break;
 				case 'C':
-					final int[] cPos = FormatTools.rasterToPosition(cDimLengths, zct[1]);
-					for (int c=0; c<cDimLengths.length; c++) {
-						if (cDimLengths[c] > 1) pos[index++] = cPos[c];
-					}
+					if (sizeC > 1) pos[index++] = zct[1];
 					break;
 			}
 		}
