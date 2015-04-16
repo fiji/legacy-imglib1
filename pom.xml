@@ -36,16 +36,6 @@
 		<dependency>
 			<groupId>ome</groupId>
 			<artifactId>formats-api</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>xalan</groupId>
-					<artifactId>serializer</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xalan</groupId>
-					<artifactId>xalan</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>ome</groupId>
@@ -72,13 +62,6 @@
 		<dependency>
 			<groupId>mpicbg</groupId>
 			<artifactId>mpicbg</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>jama</groupId>
-					<artifactId>jama</artifactId>
-				</exclusion>
-			</exclusions>
-			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jfree</groupId>
