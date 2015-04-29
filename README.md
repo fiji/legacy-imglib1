@@ -1,4 +1,4 @@
-![](http://jenkins.imagej.net/job/legacy-imglib1/lastBuild/badge/icon)
+[![](http://jenkins.imagej.net/job/legacy-imglib1/lastBuild/badge/icon)](http://jenkins.imagej.net/job/legacy-imglib1/)
 
 legacy-imglib1
 ==============
