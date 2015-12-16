@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>sc.fiji</groupId>
 		<artifactId>pom-fiji</artifactId>
-		<version>10.0.1</version>
+		<version>18.1.0</version>
 		<relativePath />
 	</parent>
 
@@ -25,6 +25,10 @@
 		<system>Jenkins</system>
 		<url>http://jenkins.imagej.net/job/legacy-imglib1/</url>
 	</ciManagement>
+
+	<properties>
+		<scijava.jvm.version>1.7</scijava.jvm.version>
+	</properties>
 
 	<repositories>
 		<!-- NB: for project parent -->
@@ -93,12 +97,13 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Java 3D dependencies -->
 		<dependency>
-			<groupId>java3d</groupId>
+			<groupId>org.scijava</groupId>
 			<artifactId>vecmath</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
+		<!-- Test scope dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
