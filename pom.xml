@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>sc.fiji</groupId>
-		<artifactId>pom-fiji</artifactId>
-		<version>19.0.0</version>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>13.0.0</version>
 		<relativePath />
 	</parent>
 
@@ -14,6 +14,23 @@
 
 	<name>Legacy ImgLib1</name>
 	<description>This project serves purely for phasing out ImgLib1 in favor of ImgLib2.</description>
+	<url>https://imagej.net/ImgLib1_(deprecated)</url>
+	<inceptionYear>2009</inceptionYear>
+	<organization>
+		<name>Fiji</name>
+		<url>http://fiji.sc/</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>Simplified BSD License</name>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>GNU General Public License v2+</name>
+			<url>http://www.gnu.org/licenses/gpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<developers>
 		<developer>
@@ -99,6 +116,13 @@
 		</contributor>
 	</contributors>
 
+	<mailingLists>
+		<mailingList>
+			<name>ImageJ Forum</name>
+			<archive>http://forum.imagej.net/</archive>
+		</mailingList>
+	</mailingLists>
+
 	<scm>
 		<connection>scm:git:git://github.com/fiji/legacy-imglib1</connection>
 		<developerConnection>scm:git:git@github.com:fiji/legacy-imglib1</developerConnection>
@@ -115,7 +139,17 @@
 	</ciManagement>
 
 	<properties>
-		<scijava.jvm.version>1.7</scijava.jvm.version>
+		<!--
+		NB: This configuration won't actually work with license-maven-plugin.
+		But it is a mixed-license codebase, so let's be up front about that.
+		-->
+		<license.licenseName>bsd_2, gpl_v3</license.licenseName>
+		<license.copyrightOwners>Stephan Preibisch, Tobias Pietzsch, Barry DeZonia,
+Stephan Saalfeld, Albert Cardona, Curtis Rueden, Christian Dietz, Jean-Yves
+Tinevez, Johannes Schindelin, Lee Kamentsky, Larry Lindsey, Grant Harris,
+Mark Hiner, Aivar Grislis, Martin Horn, Nick Perry, Michael Zinsmaier,
+Steffen Jaensch, Jan Funke, Mark Longair, and Dimiter Prodanov.</license.copyrightOwners>
+		<license.projectName>ImgLib: a general-purpose, multidimensional image processing library.</license.projectName>
 	</properties>
 
 	<repositories>
@@ -153,11 +187,11 @@
 			<artifactId>formats-bsd</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>ome</groupId>
-			<artifactId>formats-common</artifactId>
+			<groupId>org.openmicroscopy</groupId>
+			<artifactId>ome-common</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>ome</groupId>
+			<groupId>org.openmicroscopy</groupId>
 			<artifactId>ome-xml</artifactId>
 		</dependency>
 
