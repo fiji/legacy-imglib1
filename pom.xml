@@ -135,8 +135,8 @@
 		<url>https://github.com/fiji/legacy-imglib1/issues</url>
 	</issueManagement>
 	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://jenkins.imagej.net/job/legacy-imglib1/</url>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/fiji/legacy-imglib1</url>
 	</ciManagement>
 
 	<properties>

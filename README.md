@@ -1,4 +1,4 @@
-[![](http://jenkins.imagej.net/job/legacy-imglib1/lastBuild/badge/icon)](http://jenkins.imagej.net/job/legacy-imglib1/)
+[![](https://travis-ci.org/fiji/legacy-imglib1.svg?branch=master)](https://travis-ci.org/fiji/legacy-imglib1)
 
 legacy-imglib1
 ==============
