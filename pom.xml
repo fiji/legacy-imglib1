@@ -232,4 +232,17 @@ Steffen Jaensch, Jan Funke, Mark Longair, and Dimiter Prodanov.</license.copyrig
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<!-- NB: Disable the strict Java 8 doclint. -->
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
