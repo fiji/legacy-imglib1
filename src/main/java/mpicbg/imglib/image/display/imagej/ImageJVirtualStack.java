@@ -95,7 +95,7 @@ public class ImageJVirtualStack<T extends Type<T>> extends VirtualStack
 		
     
     /** Returns an ImageProcessor for the specified slice,
-        were 1<=n<=nslices. Returns null if the stack is empty.
+        where 1&lt;=n&lt;=nslices. Returns null if the stack is empty.
     */
 	@Override
     public ImageProcessor getProcessor( final int n )
@@ -235,7 +235,7 @@ public class ImageJVirtualStack<T extends Type<T>> extends VirtualStack
     @Override
     public void addSlice(String sliceLabel, ImageProcessor ip, int n) {}
     
-    /** Deletes the specified slice, were 1<=n<=nslices. */
+    /** Deletes the specified slice, where 1&lt;=n&lt;=nslices. */
     @Override
     public void deleteSlice(int n) {}
     
@@ -248,12 +248,12 @@ public class ImageJVirtualStack<T extends Type<T>> extends VirtualStack
     @Override
     public void update(ImageProcessor ip) {}
     
-    /** Returns the pixel array for the specified slice, were 1<=n<=nslices. */
+    /** Returns the pixel array for the specified slice, where 1&lt;=n&lt;=nslices. */
     @Override
     public Object getPixels(int n) { return getProcessor(n).getPixels(); }
     
     /** Assigns a pixel array to the specified slice,
-        were 1<=n<=nslices. */
+        where 1&lt;=n&lt;=nslices. */
     @Override
     public void setPixels(Object pixels, int n) {}
     
@@ -271,7 +271,7 @@ public class ImageJVirtualStack<T extends Type<T>> extends VirtualStack
     @Override
     public String[] getSliceLabels() { return null; }
     
-    /** Returns the label of the specified slice, were 1<=n<=nslices.
+    /** Returns the label of the specified slice, where 1&lt;=n&lt;=nslices.
         Returns null if the slice does not have a label. For DICOM
         and FITS stacks, labels may contain header information. */
     @Override
@@ -283,7 +283,7 @@ public class ImageJVirtualStack<T extends Type<T>> extends VirtualStack
     @Override
     public String getShortSliceLabel(int n) { return getSliceLabel(n); }
 
-    /** Sets the label of the specified slice, were 1<=n<=nslices. */
+    /** Sets the label of the specified slice, where 1&lt;=n&lt;=nslices. */
     @Override
     public void setSliceLabel(String label, int n) {}
 
