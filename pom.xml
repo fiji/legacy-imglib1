@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>13.0.0</version>
+		<version>14.0.0</version>
 		<relativePath />
 	</parent>
 
@@ -151,6 +151,9 @@ Tinevez, Johannes Schindelin, Lee Kamentsky, Larry Lindsey, Grant Harris,
 Mark Hiner, Aivar Grislis, Martin Horn, Nick Perry, Michael Zinsmaier,
 Steffen Jaensch, Jan Funke, Mark Longair, and Dimiter Prodanov.</license.copyrightOwners>
 		<license.projectName>ImgLib: a general-purpose, multidimensional image processing library.</license.projectName>
+
+		<!-- TEMP: until pom-scijava 15.0.0 is released. -->
+		<imglib2.version>4.2.1</imglib2.version>
 	</properties>
 
 	<repositories>
