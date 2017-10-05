@@ -151,6 +151,9 @@ Tinevez, Johannes Schindelin, Lee Kamentsky, Larry Lindsey, Grant Harris,
 Mark Hiner, Aivar Grislis, Martin Horn, Nick Perry, Michael Zinsmaier,
 Steffen Jaensch, Jan Funke, Mark Longair, and Dimiter Prodanov.</license.copyrightOwners>
 		<license.projectName>ImgLib: a general-purpose, multidimensional image processing library.</license.projectName>
+
+		<!-- NB: Deploy releases to the ImageJ Maven repository. -->
+		<releaseProfiles>deploy-to-imagej</releaseProfiles>
 	</properties>
 
 	<repositories>
