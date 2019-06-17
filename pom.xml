@@ -156,7 +156,7 @@ Steffen Jaensch, Jan Funke, Mark Longair, and Dimiter Prodanov.</license.copyrig
 		<releaseProfiles>deploy-to-scijava</releaseProfiles>
 
 		<!-- NB: Disable the strict Java 8 doclint. -->
-		<additionalJOption>-Xdoclint:none</additionalJOption>
+		<doclint>none</doclint>
 	</properties>
 
 	<repositories>
