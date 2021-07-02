@@ -1,4 +1,4 @@
-[![](https://travis-ci.org/fiji/legacy-imglib1.svg?branch=master)](https://travis-ci.org/fiji/legacy-imglib1)
+[![](https://github.com/fiji/legacy-imglib1/actions/workflows/build-main.yml/badge.svg)](https://github.com/fiji/legacy-imglib1/actions/workflows/build-main.yml)
 
 legacy-imglib1
 ==============
