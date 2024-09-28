@@ -29,9 +29,9 @@ package script.imglib.analysis;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.scijava.vecmath.Point2f;
-import org.scijava.vecmath.Point3f;
-import org.scijava.vecmath.Point4f;
+import org.jogamp.vecmath.Point2f;
+import org.jogamp.vecmath.Point3f;
+import org.jogamp.vecmath.Point4f;
 
 import mpicbg.imglib.algorithm.scalespace.DifferenceOfGaussian;
 import mpicbg.imglib.algorithm.scalespace.DifferenceOfGaussianPeak;
