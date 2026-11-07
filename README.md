@@ -1,4 +1,4 @@
-[![](https://github.com/fiji/legacy-imglib1/actions/workflows/build-main.yml/badge.svg)](https://github.com/fiji/legacy-imglib1/actions/workflows/build-main.yml)
+[![Build Status](https://github.com/fiji/legacy-imglib1/actions/workflows/build.yml/badge.svg)](https://github.com/fiji/legacy-imglib1/actions/workflows/build.yml)
 
 legacy-imglib1
 ==============
